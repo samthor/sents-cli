@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "mri": "^1.1.6",
+    "picomatch": "^2.2.2",
+    "sents": "^0.1.2"
+  },
+  "name": "sents-cli",
+  "version": "0.1.2",
+  "description": "Command-line file watcher",
+  "license": "Apache-2.0",
+  "author": "Sam Thorogood <sam.thorogood@gmail.com>",
+  "scripts": {
+    "test": "ava",
+    "prepublishOnly": "rollup --format=cjs bin/index.js > dist.cjs"
+  },
+  "type": "module",
+  "devDependencies": {
+    "ava": "^3.13.0",
+    "rollup": "^2.34.0"
+  }
+}
