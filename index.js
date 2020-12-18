@@ -104,21 +104,15 @@ watcher.on('error', (e) => {
   throw e;
 });
 
-
 if (args.command) {
-
   if (args.initial) {
     requestCommand();
   }
-
-  watcher.on('change', (s) => {
+  watcher.on('change', () => {
     requestCommand();
   });
-
 } else {
-
   watcher.on('change', (s, type) => {
     console.info(`${type}:${s}`);
   });
-
 }

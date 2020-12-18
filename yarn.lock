@@ -1544,10 +1544,10 @@ semver@^7.3.2:
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.2.tgz#604962b052b81ed0786aae84389ffba70ffd3938"
   integrity sha512-OrOb32TeeambH6UrhtShmF7CRDqhL6/5XpPNp2DuRH6+9QLw/orhp72j87v8Qa1ScDkvrrBNpZcDejAirJmfXQ==
 
-sents@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/sents/-/sents-0.1.2.tgz#87789954cebd49d72134f0991678bfeb410a6e05"
-  integrity sha512-mTkibMndKbSJxFTVylakpSftcYH9X8EOYHvBPcNjf6Kpeed7y2BqM634kY5+pnm+053QLX1faCj9Vgu4jD/6RA==
+sents@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/sents/-/sents-0.2.0.tgz#7c5c18e4b8bc97eae4ea05aee739691004544a60"
+  integrity sha512-2L1UY8kCQ7raNmf5GKXO6+5xMDENGB55TDeepCeob8atZ2XrBr/8unlh3s9uabhRP8z+Ifhisdrx7pU4cfwttw==
 
 serialize-error@^2.1.0:
   version "2.1.0"
