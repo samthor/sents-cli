@@ -12,7 +12,7 @@ picomatch@^2.2.2:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
   integrity sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==
 
-sents@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/sents/-/sents-0.2.0.tgz#7c5c18e4b8bc97eae4ea05aee739691004544a60"
-  integrity sha512-2L1UY8kCQ7raNmf5GKXO6+5xMDENGB55TDeepCeob8atZ2XrBr/8unlh3s9uabhRP8z+Ifhisdrx7pU4cfwttw==
+sents@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/sents/-/sents-0.3.0.tgz#0a46361a20ae23486595658d555bb41462541c54"
+  integrity sha512-d5dKRzNjjOUi5IZO3S6lHTEr24nWb+tiVFno0wC0Uh9S0pKmNGwy146avIkX4K2VUSOKG6r7xR4EDlRg1QVEwA==
