@@ -4,7 +4,9 @@
     "picomatch": "^2.2.2",
     "sents": "^0.3.0"
   },
-  "bin": "index.js",
+  "bin": {
+    "sents": "./index.js"
+  },
   "name": "sents-cli",
   "version": "0.3.0",
   "description": "Command-line file watcher",
