@@ -6,7 +6,7 @@
   },
   "bin": "index.js",
   "name": "sents-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Command-line file watcher",
   "license": "Apache-2.0",
   "author": "Sam Thorogood <sam.thorogood@gmail.com>",
