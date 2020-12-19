@@ -8,7 +8,7 @@
     "sents": "./index.js"
   },
   "name": "sents-cli",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Command-line file watcher",
   "license": "Apache-2.0",
   "author": "Sam Thorogood <sam.thorogood@gmail.com>",
