@@ -121,11 +121,11 @@ if (args.command) {
   if (args.initial) {
     requestCommand();
   }
-  watcher.on('change', () => {
+  watcher.on('raw', () => {
     requestCommand();
   });
 } else {
-  watcher.on('change', (s, type) => {
+  watcher.on('raw', (s, type) => {
     console.info(`${type}:${s}`);
   });
 }
