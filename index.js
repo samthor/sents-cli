@@ -2,9 +2,8 @@
 
 import mri from 'mri';
 import buildWatcher from 'sents';
-import pm from 'picomatch';
-import path from 'path';
 import childProcess from 'child_process';
+import {build as buildFilter} from './lib/filter.js';
 
 const args = mri(process.argv.slice(2), {
   alias: {
@@ -49,7 +48,6 @@ Options:
  */
 const requestCommand = args.command ? (function() {
   const run = () => {
-    // TODO(samthor): possibly broken
     childProcess.execSync(args.command, {shell: true, stdio: 'inherit'});
   };
 
@@ -66,41 +64,9 @@ const requestCommand = args.command ? (function() {
   }
 })() : null;
 
-/**
- * Builds the filter passed to Sents.
- */
-const filter = (function() {
-  if (!args._.length) {
-    return () => true;
-  }
+const {filter, root} = buildFilter(args._, args.root || process.cwd());
 
-  const globs = args._.filter((cand) => {
-    if (cand.startsWith('/')) {
-      throw new Error('regexp unsupported');
-    }
-    return true;
-  });
-
-  // TODO(samthor): Make noise about all the arguments which are not actually globs, so users
-  // realise that their shell might have expanded them.
-
-  const globMatch = pm(globs, {
-    dot: true,  // dotfiles are handled in watcher
-  });
-
-  return (s) => {
-    if (s.endsWith(path.sep)) {
-      // TODO(samthor): do some kinda prefix match on left
-      // e.g. input: "foo/bar/" against
-      //      glob: "**/bar/zing/*.js" should pass
-      return true;
-    }
-    return globMatch(s);
-  };
-
-}());
-
-const root = args.root || process.cwd();
+console.warn('Watching', args._.map((r) => JSON.stringify(r)).join(', '));
 
 /** @type {import('sents').CorpusOptions} */
 const options = {
@@ -110,6 +76,7 @@ const options = {
 if ('delay' in args) {
   options.delay = +args.delay;
 }
+
 const watcher = buildWatcher(root, options);
 await watcher.ready;
 
@@ -118,12 +85,8 @@ watcher.on('error', (e) => {
 });
 
 if (args.command) {
-  if (args.initial) {
-    requestCommand();
-  }
-  watcher.on('raw', () => {
-    requestCommand();
-  });
+  args.initial && requestCommand();
+  watcher.on('raw', requestCommand);
 } else {
   watcher.on('raw', (s, type) => {
     console.info(`${type}:${s}`);
