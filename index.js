@@ -66,7 +66,10 @@ const requestCommand = args.command ? (function() {
 
 const {filter, root} = buildFilter(args._, args.root || process.cwd());
 
-console.warn('Watching', args._.map((r) => JSON.stringify(r)).join(', '));
+const paths = args._;
+if (!paths.length) {
+  paths.push('.');
+}
 
 /** @type {import('sents').CorpusOptions} */
 const options = {
@@ -78,7 +81,16 @@ if ('delay' in args) {
 }
 
 const watcher = buildWatcher(root, options);
+
+// TODO(samthor): This actually doesn't work right now because none of watcher uses async: it
+// won't yield to this code.
+const timeout = setTimeout(() => {
+  console.warn('Taking a long time, did you specify too many files?');
+}, 1250);
 await watcher.ready;
+clearTimeout(timeout);
+
+console.warn('Watching', paths.map((r) => JSON.stringify(r)).join(', '));
 
 watcher.on('error', (e) => {
   throw e;

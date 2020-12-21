@@ -12,6 +12,9 @@ sents --help
 # to print all CSS files that have changed
 sents "foo/**/*.css"
 
+# to print everything in a folder
+sents "path/to/folder"
+
 # to rebuild JS after any file changes, deduped to every second
 sents "**/*.js" -c "rollup" -d 1000
 ```
