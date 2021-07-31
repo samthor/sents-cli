@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mri": "^1.1.6",
-    "picomatch": "^2.2.2",
+    "picomatch": "^2.3.0",
     "sents": "^0.3.2"
   },
   "bin": {

@@ -1,5 +1,8 @@
 Command-line filesystem watcher, useful for running commands when something changes.
-Uses [sents](https://www.npmjs.com/package/sents) under the hood, which is a fast watcher with zero dependencies and no native code.
+Has only three direct dependencies and uses no native code!
+
+⚠️ This uses [sents](https://www.npmjs.com/package/sents) under the hood, which is a fast watcher with zero dependencies and no native code.
+Try it out if you'd like even fewer dependencies!
 
 # Usage
 
