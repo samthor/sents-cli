@@ -1,5 +1,5 @@
 Command-line filesystem watcher, useful for running commands when something changes.
-Uses [sents](https://www.npmjs.com/package/sents) under the hood.
+Uses [sents](https://www.npmjs.com/package/sents) under the hood, which is a fast watcher with zero dependencies and no native code.
 
 # Usage
 

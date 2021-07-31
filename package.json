@@ -2,15 +2,26 @@
   "dependencies": {
     "mri": "^1.1.6",
     "picomatch": "^2.2.2",
-    "sents": "^0.3.0"
+    "sents": "^0.3.2"
   },
   "bin": {
     "sents": "./index.js"
   },
   "name": "sents-cli",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Command-line file watcher",
   "license": "Apache-2.0",
   "author": "Sam Thorogood <sam.thorogood@gmail.com>",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^16.4.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samthor/sents-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samthor/sents-cli/issues"
+  },
+  "homepage": "https://github.com/samthor/sents-cli#readme"
 }

@@ -2,8 +2,9 @@
 
 import mri from 'mri';
 import buildWatcher from 'sents';
-import childProcess from 'child_process';
+import * as childProcess from 'child_process';
 import {build as buildFilter} from './lib/filter.js';
+import * as sentsTypes from 'sents';
 
 const args = mri(process.argv.slice(2), {
   alias: {
@@ -11,6 +12,7 @@ const args = mri(process.argv.slice(2), {
     'debounce': ['d'],
     'command': ['c'],
     'root': ['r'],
+    'initial': ['i'],
   },
   default: {
     'delay': undefined,
@@ -33,8 +35,9 @@ Globs:
   expand them for you.
 
 Options:
-  -d, --debounce <ms>  debounce time for command
+  -d, --debounce <ms>  debounce for command (run at most every, default 400ms)
   -c, --command <cmd>  command to run on change, use quotes
+  -i, --initial        run command once at start
   -r, --root <path>    root path to use, or uses current working directory
   --dotfiles           whether to match dotfiles
   --delay <ms>         tell sents to delay change detection by this long
@@ -43,26 +46,6 @@ Options:
   process.exit(0);
 }
 
-/**
- * Call when the comamnd should be triggered. Debounces based on args.
- */
-const requestCommand = args.command ? (function() {
-  const run = () => {
-    childProcess.execSync(args.command, {shell: true, stdio: 'inherit'});
-  };
-
-  let timeoutCommand = 0;
-
-  return () => {
-    if (timeoutCommand !== 0) {
-      return;
-    }
-    timeoutCommand = setTimeout(() => {
-      timeoutCommand = 0;
-      run();
-    }, args.debounce);
-  }
-})() : null;
 
 const {filter, root} = buildFilter(args._, args.root || process.cwd());
 
@@ -71,7 +54,7 @@ if (!paths.length) {
   paths.push('.');
 }
 
-/** @type {import('sents').CorpusOptions} */
+/** @type {Partial<sentsTypes.CorpusOptions>} */
 const options = {
   dotfiles: Boolean(args.dotfiles),
   filter,
@@ -90,13 +73,31 @@ const timeout = setTimeout(() => {
 await watcher.ready;
 clearTimeout(timeout);
 
-console.warn('Watching', paths.map((r) => JSON.stringify(r)).join(', '));
+console.warn('Watching', paths.map((r) => JSON.stringify(r)).join(', '), '...');
 
 watcher.on('error', (e) => {
   throw e;
 });
 
 if (args.command) {
+  /**
+   * Call when the comamnd should be triggered. Debounces based on args.
+   */
+  const requestCommand = (function() {
+    /** @type {NodeJS.Timeout?} */
+    let timeoutCommand = null;
+
+    return () => {
+      if (timeoutCommand) {
+        return;
+      }
+      timeoutCommand = setTimeout(() => {
+        timeoutCommand = null;
+        childProcess.execSync(args.command, {stdio: 'inherit'});
+      }, args.debounce);
+    };
+  })();
+
   args.initial && requestCommand();
   watcher.on('raw', requestCommand);
 } else {
